@@ -23,10 +23,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::query()->updateOrCreate(['email' => 'admin@vihaaraa.com'], [
-            'name' => 'Vihaaraa Admin', 'password' => 'Admin@123', 'role' => User::ROLE_ADMIN,
+            'name' => 'Vihaaraa Admin', 'password' => '123456', 'role' => User::ROLE_ADMIN,
         ]);
         User::query()->updateOrCreate(['email' => 'customer@vihaaraa.com'], [
-            'name' => 'Demo Customer', 'phone' => '9876543210', 'password' => 'Customer@123', 'role' => User::ROLE_CUSTOMER,
+            'name' => 'Demo Customer', 'phone' => '123456', 'password' => 'Customer@123', 'role' => User::ROLE_CUSTOMER,
         ]);
 
         $this->categories();

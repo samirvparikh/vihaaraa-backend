@@ -19,8 +19,8 @@ MySQL 5.7 note: tables are created as InnoDB (`DB_ENGINE` in `.env` to override)
 
 | Who | Where | Email | Password |
 |---|---|---|---|
-| Admin | http://localhost:8000/admin | admin@vihaaraa.com | Admin@123 |
-| Customer | storefront `/login` | customer@vihaaraa.com | Customer@123 |
+| Admin | http://localhost:8000/admin | admin@vihaaraa.com | 123456 |
+| Customer | storefront `/login` | customer@vihaaraa.com | 123456 |
 
 Admins can only sign in to the admin panel and customers only to the storefront.
 
