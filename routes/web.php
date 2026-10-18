@@ -3,9 +3,14 @@
 use App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/admin');
+// URL prefix of the admin panel. Leave ADMIN_PATH empty when the app itself is served from /admin (index.php in the project root).
+$adminPath = trim(config('app.admin_path'), '/');
 
-Route::prefix('admin')->name('admin.')->group(function () {
+if ($adminPath !== '') {
+    Route::redirect('/', '/'.$adminPath);
+}
+
+Route::prefix($adminPath)->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('login', [Admin\AuthController::class, 'show'])->name('login');
         Route::post('login', [Admin\AuthController::class, 'login'])->middleware('throttle:10,1');

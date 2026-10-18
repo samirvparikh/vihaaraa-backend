@@ -54,6 +54,13 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    /*
+    | URL prefix of the admin panel ("admin" -> /admin/login). Set ADMIN_PATH= (empty)
+    | when the app is already served from an /admin folder.
+    */
+
+    'admin_path' => env('ADMIN_PATH', 'admin'),
+
     // React storefront, linked from the admin panel.
     'frontend_url' => env('FRONTEND_URL', 'http://localhost:5173'),
 

@@ -1,0 +1,36 @@
+# Serve the app from this folder: static files come from public/, everything else goes to index.php.
+<IfModule mod_negotiation.c>
+    Options -MultiViews -Indexes
+</IfModule>
+
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    RewriteRule ^index\.php$ - [L]
+
+    # Files that exist in public/ (admin/admin.css, storage/..., favicon.ico); %2 is this folder's URL path
+    RewriteCond $1#%{REQUEST_URI} ^(.+)#(.*/)\1$
+    RewriteCond %{DOCUMENT_ROOT}%2public/$1 -f
+    RewriteRule ^(.+)$ public/$1 [L]
+
+    # Never expose the application source, config or dotfiles (Laravel answers 404)
+    RewriteRule ^(\.(?!well-known)|public/|app/|bootstrap/|config/|database/|resources/|routes/|storage/|tests/|vendor/|node_modules/|artisan|composer\.|package|phpunit|vite\.config|[^/]+\.md$) index.php [L]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteRule ^ index.php [L]
+</IfModule>
